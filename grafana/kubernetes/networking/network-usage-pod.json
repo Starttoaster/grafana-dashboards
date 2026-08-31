@@ -1,0 +1,1692 @@
+{
+    "apiVersion": "dashboard.grafana.app/v2",
+    "kind": "Dashboard",
+    "metadata": {
+      "name": "7a18067ce943a40ae25454675c19ff5c",
+      "namespace": "default",
+      "uid": "8d04b349-2514-4904-8be8-f24f7a6eb682",
+      "resourceVersion": "1787937754053984",
+      "generation": 1,
+      "creationTimestamp": "2026-08-28T17:22:34Z",
+      "labels": {
+        "grafana.app/deprecatedInternalID": "3718556930129920"
+      },
+      "annotations": {
+        "grafana.app/createdBy": "access-policy:service",
+        "grafana.app/managedBy": "classic-file-provisioning",
+        "grafana.app/managerId": "Networking",
+        "grafana.app/sourceChecksum": "df84d6c0f71e3cf1636138665438e009",
+        "grafana.app/sourcePath": "/var/lib/grafana-dashboards/networking/k8s-network-pod.json",
+        "grafana.app/sourceTimestamp": "1787937617000"
+      }
+    },
+    "spec": {
+      "annotations": [
+        {
+          "kind": "AnnotationQuery",
+          "spec": {
+            "query": {
+              "kind": "DataQuery",
+              "group": "datasource",
+              "version": "v0",
+              "datasource": {
+                "name": "grafana"
+              },
+              "spec": {}
+            },
+            "enable": true,
+            "hide": true,
+            "iconColor": "rgba(0, 211, 255, 1)",
+            "name": "Annotations & Alerts",
+            "builtIn": true,
+            "legacyOptions": {
+              "type": "dashboard"
+            }
+          }
+        }
+      ],
+      "cursorSync": "Off",
+      "editable": true,
+      "elements": {
+        "panel-10": {
+          "kind": "Panel",
+          "spec": {
+            "id": 10,
+            "title": "Rate of Transmitted Packets",
+            "links": [],
+            "data": {
+              "kind": "QueryGroup",
+              "spec": {
+                "queries": [
+                  {
+                    "kind": "PanelQuery",
+                    "spec": {
+                      "query": {
+                        "kind": "DataQuery",
+                        "group": "",
+                        "version": "v0",
+                        "datasource": {
+                          "name": "$datasource"
+                        },
+                        "spec": {
+                          "expr": "sum(irate(container_network_transmit_packets_total{cluster=\"$cluster\",namespace=~\"$namespace\", pod=~\"$pod\"}[$interval:$resolution])) by (pod)",
+                          "format": "time_series",
+                          "intervalFactor": 1,
+                          "legendFormat": "{{pod}}",
+                          "step": 10
+                        }
+                      },
+                      "refId": "A",
+                      "hidden": false
+                    }
+                  }
+                ],
+                "transformations": [],
+                "queryOptions": {}
+              }
+            },
+            "vizConfig": {
+              "kind": "VizConfig",
+              "group": "timeseries",
+              "version": "10.4.0",
+              "spec": {
+                "options": {
+                  "__angularMigration": {
+                    "autoMigrateFrom": "timeseries",
+                    "originalOptions": {
+                      "minSpan": 12
+                    }
+                  },
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                  },
+                  "tooltip": {
+                    "mode": "multi",
+                    "sort": "desc"
+                  }
+                },
+                "fieldConfig": {
+                  "defaults": {
+                    "unit": "pps",
+                    "min": 0,
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "value": null,
+                          "color": "green"
+                        },
+                        {
+                          "value": 80,
+                          "color": "red"
+                        }
+                      ]
+                    },
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisBorderShow": false,
+                      "axisCenteredZero": false,
+                      "axisColorMode": "text",
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 20,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "insertNulls": false,
+                      "lineInterpolation": "linear",
+                      "lineWidth": 2,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "never",
+                      "spanNulls": true,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "normal"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    }
+                  },
+                  "overrides": [
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsZero",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsNull",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "panel-12": {
+          "kind": "Panel",
+          "spec": {
+            "id": 12,
+            "title": "Rate of Received Packets Dropped",
+            "links": [],
+            "data": {
+              "kind": "QueryGroup",
+              "spec": {
+                "queries": [
+                  {
+                    "kind": "PanelQuery",
+                    "spec": {
+                      "query": {
+                        "kind": "DataQuery",
+                        "group": "",
+                        "version": "v0",
+                        "datasource": {
+                          "name": "$datasource"
+                        },
+                        "spec": {
+                          "expr": "sum(irate(container_network_receive_packets_dropped_total{cluster=\"$cluster\",namespace=~\"$namespace\", pod=~\"$pod\"}[$interval:$resolution])) by (pod)",
+                          "format": "time_series",
+                          "intervalFactor": 1,
+                          "legendFormat": "{{pod}}",
+                          "step": 10
+                        }
+                      },
+                      "refId": "A",
+                      "hidden": false
+                    }
+                  }
+                ],
+                "transformations": [],
+                "queryOptions": {}
+              }
+            },
+            "vizConfig": {
+              "kind": "VizConfig",
+              "group": "timeseries",
+              "version": "10.4.0",
+              "spec": {
+                "options": {
+                  "__angularMigration": {
+                    "autoMigrateFrom": "timeseries",
+                    "originalOptions": {
+                      "minSpan": 12
+                    }
+                  },
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                  },
+                  "tooltip": {
+                    "mode": "multi",
+                    "sort": "desc"
+                  }
+                },
+                "fieldConfig": {
+                  "defaults": {
+                    "unit": "pps",
+                    "min": 0,
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "value": null,
+                          "color": "green"
+                        },
+                        {
+                          "value": 80,
+                          "color": "red"
+                        }
+                      ]
+                    },
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisBorderShow": false,
+                      "axisCenteredZero": false,
+                      "axisColorMode": "text",
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 20,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "insertNulls": false,
+                      "lineInterpolation": "linear",
+                      "lineWidth": 2,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "never",
+                      "spanNulls": true,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "normal"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    }
+                  },
+                  "overrides": [
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsZero",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsNull",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "panel-13": {
+          "kind": "Panel",
+          "spec": {
+            "id": 13,
+            "title": "Rate of Transmitted Packets Dropped",
+            "links": [],
+            "data": {
+              "kind": "QueryGroup",
+              "spec": {
+                "queries": [
+                  {
+                    "kind": "PanelQuery",
+                    "spec": {
+                      "query": {
+                        "kind": "DataQuery",
+                        "group": "",
+                        "version": "v0",
+                        "datasource": {
+                          "name": "$datasource"
+                        },
+                        "spec": {
+                          "expr": "sum(irate(container_network_transmit_packets_dropped_total{cluster=\"$cluster\",namespace=~\"$namespace\", pod=~\"$pod\"}[$interval:$resolution])) by (pod)",
+                          "format": "time_series",
+                          "intervalFactor": 1,
+                          "legendFormat": "{{pod}}",
+                          "step": 10
+                        }
+                      },
+                      "refId": "A",
+                      "hidden": false
+                    }
+                  }
+                ],
+                "transformations": [],
+                "queryOptions": {}
+              }
+            },
+            "vizConfig": {
+              "kind": "VizConfig",
+              "group": "timeseries",
+              "version": "10.4.0",
+              "spec": {
+                "options": {
+                  "__angularMigration": {
+                    "autoMigrateFrom": "timeseries",
+                    "originalOptions": {
+                      "minSpan": 12
+                    }
+                  },
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                  },
+                  "tooltip": {
+                    "mode": "multi",
+                    "sort": "desc"
+                  }
+                },
+                "fieldConfig": {
+                  "defaults": {
+                    "unit": "pps",
+                    "min": 0,
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "value": null,
+                          "color": "green"
+                        },
+                        {
+                          "value": 80,
+                          "color": "red"
+                        }
+                      ]
+                    },
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisBorderShow": false,
+                      "axisCenteredZero": false,
+                      "axisColorMode": "text",
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 20,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "insertNulls": false,
+                      "lineInterpolation": "linear",
+                      "lineWidth": 2,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "never",
+                      "spanNulls": true,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "normal"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    }
+                  },
+                  "overrides": [
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsZero",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsNull",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "panel-3": {
+          "kind": "Panel",
+          "spec": {
+            "id": 3,
+            "title": "Current Rate of Bytes Received",
+            "links": [],
+            "data": {
+              "kind": "QueryGroup",
+              "spec": {
+                "queries": [
+                  {
+                    "kind": "PanelQuery",
+                    "spec": {
+                      "query": {
+                        "kind": "DataQuery",
+                        "group": "",
+                        "version": "v0",
+                        "datasource": {
+                          "name": "$datasource"
+                        },
+                        "spec": {
+                          "expr": "sum(irate(container_network_receive_bytes_total{cluster=\"$cluster\",namespace=~\"$namespace\", pod=~\"$pod\"}[$interval:$resolution]))",
+                          "format": "time_series",
+                          "intervalFactor": 1,
+                          "legendFormat": ""
+                        }
+                      },
+                      "refId": "A",
+                      "hidden": false
+                    }
+                  }
+                ],
+                "transformations": [],
+                "queryOptions": {
+                  "maxDataPoints": 100
+                }
+              }
+            },
+            "vizConfig": {
+              "kind": "VizConfig",
+              "group": "gauge",
+              "version": "10.4.0",
+              "spec": {
+                "options": {
+                  "__angularMigration": {
+                    "autoMigrateFrom": "gauge",
+                    "originalOptions": {
+                      "colorBackground": false,
+                      "colorValue": false,
+                      "colors": [
+                        "#299c46",
+                        "rgba(237, 129, 40, 0.89)",
+                        "#d44a3a"
+                      ],
+                      "decimals": 0,
+                      "format": "time_series",
+                      "gauge": {
+                        "maxValue": 100,
+                        "minValue": 0,
+                        "show": false,
+                        "thresholdLabels": false,
+                        "thresholdMarkers": true
+                      },
+                      "height": 9,
+                      "mappingType": 1,
+                      "mappingTypes": [
+                        {
+                          "name": "value to text",
+                          "value": 1
+                        },
+                        {
+                          "name": "range to text",
+                          "value": 2
+                        }
+                      ],
+                      "minSpan": 12,
+                      "nullPointMode": "connected",
+                      "postfix": "",
+                      "postfixFontSize": "50%",
+                      "prefix": "",
+                      "prefixFontSize": "50%",
+                      "rangeMaps": [
+                        {
+                          "from": "null",
+                          "text": "N/A",
+                          "to": "null"
+                        }
+                      ],
+                      "span": 12,
+                      "sparkline": {
+                        "fillColor": "rgba(31, 118, 189, 0.18)",
+                        "full": false,
+                        "lineColor": "rgb(31, 120, 193)",
+                        "show": false
+                      },
+                      "tableColumn": "",
+                      "thresholds": "",
+                      "valueFontSize": "80%",
+                      "valueMaps": [
+                        {
+                          "op": "=",
+                          "text": "N/A",
+                          "value": "null"
+                        }
+                      ],
+                      "valueName": "current"
+                    }
+                  },
+                  "minVizHeight": 75,
+                  "minVizWidth": 75,
+                  "orientation": "auto",
+                  "reduceOptions": {
+                    "calcs": [
+                      "last"
+                    ],
+                    "fields": "",
+                    "values": false
+                  },
+                  "showThresholdLabels": false,
+                  "showThresholdMarkers": true,
+                  "sizing": "auto"
+                },
+                "fieldConfig": {
+                  "defaults": {
+                    "displayName": "$namespace: $pod",
+                    "unit": "Bps",
+                    "min": 0,
+                    "max": 10000000000,
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "value": null,
+                          "color": "dark-green"
+                        },
+                        {
+                          "value": 5000000000,
+                          "color": "dark-yellow"
+                        },
+                        {
+                          "value": 7000000000,
+                          "color": "dark-red"
+                        }
+                      ]
+                    },
+                    "color": {
+                      "mode": "thresholds"
+                    }
+                  },
+                  "overrides": []
+                }
+              }
+            }
+          }
+        },
+        "panel-4": {
+          "kind": "Panel",
+          "spec": {
+            "id": 4,
+            "title": "Current Rate of Bytes Transmitted",
+            "links": [],
+            "data": {
+              "kind": "QueryGroup",
+              "spec": {
+                "queries": [
+                  {
+                    "kind": "PanelQuery",
+                    "spec": {
+                      "query": {
+                        "kind": "DataQuery",
+                        "group": "",
+                        "version": "v0",
+                        "datasource": {
+                          "name": "$datasource"
+                        },
+                        "spec": {
+                          "expr": "sum(irate(container_network_transmit_bytes_total{cluster=\"$cluster\",namespace=~\"$namespace\", pod=~\"$pod\"}[$interval:$resolution]))",
+                          "format": "time_series",
+                          "intervalFactor": 1,
+                          "legendFormat": ""
+                        }
+                      },
+                      "refId": "A",
+                      "hidden": false
+                    }
+                  }
+                ],
+                "transformations": [],
+                "queryOptions": {
+                  "maxDataPoints": 100
+                }
+              }
+            },
+            "vizConfig": {
+              "kind": "VizConfig",
+              "group": "gauge",
+              "version": "10.4.0",
+              "spec": {
+                "options": {
+                  "__angularMigration": {
+                    "autoMigrateFrom": "gauge",
+                    "originalOptions": {
+                      "colorBackground": false,
+                      "colorValue": false,
+                      "colors": [
+                        "#299c46",
+                        "rgba(237, 129, 40, 0.89)",
+                        "#d44a3a"
+                      ],
+                      "decimals": 0,
+                      "format": "time_series",
+                      "gauge": {
+                        "maxValue": 100,
+                        "minValue": 0,
+                        "show": false,
+                        "thresholdLabels": false,
+                        "thresholdMarkers": true
+                      },
+                      "height": 9,
+                      "mappingType": 1,
+                      "mappingTypes": [
+                        {
+                          "name": "value to text",
+                          "value": 1
+                        },
+                        {
+                          "name": "range to text",
+                          "value": 2
+                        }
+                      ],
+                      "minSpan": 12,
+                      "nullPointMode": "connected",
+                      "postfix": "",
+                      "postfixFontSize": "50%",
+                      "prefix": "",
+                      "prefixFontSize": "50%",
+                      "rangeMaps": [
+                        {
+                          "from": "null",
+                          "text": "N/A",
+                          "to": "null"
+                        }
+                      ],
+                      "span": 12,
+                      "sparkline": {
+                        "fillColor": "rgba(31, 118, 189, 0.18)",
+                        "full": false,
+                        "lineColor": "rgb(31, 120, 193)",
+                        "show": false
+                      },
+                      "tableColumn": "",
+                      "thresholds": "",
+                      "valueFontSize": "80%",
+                      "valueMaps": [
+                        {
+                          "op": "=",
+                          "text": "N/A",
+                          "value": "null"
+                        }
+                      ],
+                      "valueName": "current"
+                    }
+                  },
+                  "minVizHeight": 75,
+                  "minVizWidth": 75,
+                  "orientation": "auto",
+                  "reduceOptions": {
+                    "calcs": [
+                      "last"
+                    ],
+                    "fields": "",
+                    "values": false
+                  },
+                  "showThresholdLabels": false,
+                  "showThresholdMarkers": true,
+                  "sizing": "auto"
+                },
+                "fieldConfig": {
+                  "defaults": {
+                    "displayName": "$namespace: $pod",
+                    "unit": "Bps",
+                    "min": 0,
+                    "max": 10000000000,
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "value": null,
+                          "color": "dark-green"
+                        },
+                        {
+                          "value": 5000000000,
+                          "color": "dark-yellow"
+                        },
+                        {
+                          "value": 7000000000,
+                          "color": "dark-red"
+                        }
+                      ]
+                    },
+                    "color": {
+                      "mode": "thresholds"
+                    }
+                  },
+                  "overrides": []
+                }
+              }
+            }
+          }
+        },
+        "panel-6": {
+          "kind": "Panel",
+          "spec": {
+            "id": 6,
+            "title": "Receive Bandwidth",
+            "links": [],
+            "data": {
+              "kind": "QueryGroup",
+              "spec": {
+                "queries": [
+                  {
+                    "kind": "PanelQuery",
+                    "spec": {
+                      "query": {
+                        "kind": "DataQuery",
+                        "group": "",
+                        "version": "v0",
+                        "datasource": {
+                          "name": "$datasource"
+                        },
+                        "spec": {
+                          "expr": "sum(irate(container_network_receive_bytes_total{cluster=\"$cluster\",namespace=~\"$namespace\", pod=~\"$pod\"}[$interval:$resolution])) by (pod)",
+                          "format": "time_series",
+                          "intervalFactor": 1,
+                          "legendFormat": "{{pod}}",
+                          "step": 10
+                        }
+                      },
+                      "refId": "A",
+                      "hidden": false
+                    }
+                  }
+                ],
+                "transformations": [],
+                "queryOptions": {}
+              }
+            },
+            "vizConfig": {
+              "kind": "VizConfig",
+              "group": "timeseries",
+              "version": "10.4.0",
+              "spec": {
+                "options": {
+                  "__angularMigration": {
+                    "autoMigrateFrom": "timeseries",
+                    "originalOptions": {
+                      "minSpan": 12
+                    }
+                  },
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                  },
+                  "tooltip": {
+                    "mode": "multi",
+                    "sort": "desc"
+                  }
+                },
+                "fieldConfig": {
+                  "defaults": {
+                    "unit": "Bps",
+                    "min": 0,
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "value": null,
+                          "color": "green"
+                        },
+                        {
+                          "value": 80,
+                          "color": "red"
+                        }
+                      ]
+                    },
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisBorderShow": false,
+                      "axisCenteredZero": false,
+                      "axisColorMode": "text",
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 20,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "insertNulls": false,
+                      "lineInterpolation": "linear",
+                      "lineWidth": 2,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "never",
+                      "spanNulls": true,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "normal"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    }
+                  },
+                  "overrides": [
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsZero",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsNull",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "panel-7": {
+          "kind": "Panel",
+          "spec": {
+            "id": 7,
+            "title": "Transmit Bandwidth",
+            "links": [],
+            "data": {
+              "kind": "QueryGroup",
+              "spec": {
+                "queries": [
+                  {
+                    "kind": "PanelQuery",
+                    "spec": {
+                      "query": {
+                        "kind": "DataQuery",
+                        "group": "",
+                        "version": "v0",
+                        "datasource": {
+                          "name": "$datasource"
+                        },
+                        "spec": {
+                          "expr": "sum(irate(container_network_transmit_bytes_total{cluster=\"$cluster\",namespace=~\"$namespace\", pod=~\"$pod\"}[$interval:$resolution])) by (pod)",
+                          "format": "time_series",
+                          "intervalFactor": 1,
+                          "legendFormat": "{{pod}}",
+                          "step": 10
+                        }
+                      },
+                      "refId": "A",
+                      "hidden": false
+                    }
+                  }
+                ],
+                "transformations": [],
+                "queryOptions": {}
+              }
+            },
+            "vizConfig": {
+              "kind": "VizConfig",
+              "group": "timeseries",
+              "version": "10.4.0",
+              "spec": {
+                "options": {
+                  "__angularMigration": {
+                    "autoMigrateFrom": "timeseries",
+                    "originalOptions": {
+                      "minSpan": 12
+                    }
+                  },
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                  },
+                  "tooltip": {
+                    "mode": "multi",
+                    "sort": "desc"
+                  }
+                },
+                "fieldConfig": {
+                  "defaults": {
+                    "unit": "Bps",
+                    "min": 0,
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "value": null,
+                          "color": "green"
+                        },
+                        {
+                          "value": 80,
+                          "color": "red"
+                        }
+                      ]
+                    },
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisBorderShow": false,
+                      "axisCenteredZero": false,
+                      "axisColorMode": "text",
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 20,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "insertNulls": false,
+                      "lineInterpolation": "linear",
+                      "lineWidth": 2,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "never",
+                      "spanNulls": true,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "normal"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    }
+                  },
+                  "overrides": [
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsZero",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsNull",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "panel-9": {
+          "kind": "Panel",
+          "spec": {
+            "id": 9,
+            "title": "Rate of Received Packets",
+            "links": [],
+            "data": {
+              "kind": "QueryGroup",
+              "spec": {
+                "queries": [
+                  {
+                    "kind": "PanelQuery",
+                    "spec": {
+                      "query": {
+                        "kind": "DataQuery",
+                        "group": "",
+                        "version": "v0",
+                        "datasource": {
+                          "name": "$datasource"
+                        },
+                        "spec": {
+                          "expr": "sum(irate(container_network_receive_packets_total{cluster=\"$cluster\",namespace=~\"$namespace\", pod=~\"$pod\"}[$interval:$resolution])) by (pod)",
+                          "format": "time_series",
+                          "intervalFactor": 1,
+                          "legendFormat": "{{pod}}",
+                          "step": 10
+                        }
+                      },
+                      "refId": "A",
+                      "hidden": false
+                    }
+                  }
+                ],
+                "transformations": [],
+                "queryOptions": {}
+              }
+            },
+            "vizConfig": {
+              "kind": "VizConfig",
+              "group": "timeseries",
+              "version": "10.4.0",
+              "spec": {
+                "options": {
+                  "__angularMigration": {
+                    "autoMigrateFrom": "timeseries",
+                    "originalOptions": {
+                      "minSpan": 12
+                    }
+                  },
+                  "legend": {
+                    "calcs": [],
+                    "displayMode": "list",
+                    "placement": "bottom",
+                    "showLegend": true
+                  },
+                  "tooltip": {
+                    "mode": "multi",
+                    "sort": "desc"
+                  }
+                },
+                "fieldConfig": {
+                  "defaults": {
+                    "unit": "pps",
+                    "min": 0,
+                    "thresholds": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "value": null,
+                          "color": "green"
+                        },
+                        {
+                          "value": 80,
+                          "color": "red"
+                        }
+                      ]
+                    },
+                    "color": {
+                      "mode": "palette-classic"
+                    },
+                    "custom": {
+                      "axisBorderShow": false,
+                      "axisCenteredZero": false,
+                      "axisColorMode": "text",
+                      "axisLabel": "",
+                      "axisPlacement": "auto",
+                      "barAlignment": 0,
+                      "drawStyle": "line",
+                      "fillOpacity": 20,
+                      "gradientMode": "none",
+                      "hideFrom": {
+                        "legend": false,
+                        "tooltip": false,
+                        "viz": false
+                      },
+                      "insertNulls": false,
+                      "lineInterpolation": "linear",
+                      "lineWidth": 2,
+                      "pointSize": 5,
+                      "scaleDistribution": {
+                        "type": "linear"
+                      },
+                      "showPoints": "never",
+                      "spanNulls": true,
+                      "stacking": {
+                        "group": "A",
+                        "mode": "normal"
+                      },
+                      "thresholdsStyle": {
+                        "mode": "off"
+                      }
+                    }
+                  },
+                  "overrides": [
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsZero",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "matcher": {
+                        "id": "byValue",
+                        "options": {
+                          "op": "gte",
+                          "reducer": "allIsNull",
+                          "value": 0
+                        }
+                      },
+                      "properties": [
+                        {
+                          "id": "custom.hideFrom",
+                          "value": {
+                            "legend": true,
+                            "tooltip": true,
+                            "viz": false
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "layout": {
+        "kind": "RowsLayout",
+        "spec": {
+          "rows": [
+            {
+              "kind": "RowsLayoutRow",
+              "spec": {
+                "title": "Current Bandwidth",
+                "collapse": false,
+                "layout": {
+                  "kind": "GridLayout",
+                  "spec": {
+                    "items": [
+                      {
+                        "kind": "GridLayoutItem",
+                        "spec": {
+                          "x": 0,
+                          "y": 0,
+                          "width": 12,
+                          "height": 9,
+                          "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-3"
+                          }
+                        }
+                      },
+                      {
+                        "kind": "GridLayoutItem",
+                        "spec": {
+                          "x": 12,
+                          "y": 0,
+                          "width": 12,
+                          "height": 9,
+                          "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-4"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "kind": "RowsLayoutRow",
+              "spec": {
+                "title": "Bandwidth",
+                "collapse": false,
+                "layout": {
+                  "kind": "GridLayout",
+                  "spec": {
+                    "items": [
+                      {
+                        "kind": "GridLayoutItem",
+                        "spec": {
+                          "x": 0,
+                          "y": 0,
+                          "width": 12,
+                          "height": 9,
+                          "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-6"
+                          }
+                        }
+                      },
+                      {
+                        "kind": "GridLayoutItem",
+                        "spec": {
+                          "x": 12,
+                          "y": 0,
+                          "width": 12,
+                          "height": 9,
+                          "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-7"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "kind": "RowsLayoutRow",
+              "spec": {
+                "title": "Packets",
+                "collapse": true,
+                "layout": {
+                  "kind": "GridLayout",
+                  "spec": {
+                    "items": [
+                      {
+                        "kind": "GridLayoutItem",
+                        "spec": {
+                          "x": 0,
+                          "y": 0,
+                          "width": 12,
+                          "height": 10,
+                          "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-9"
+                          }
+                        }
+                      },
+                      {
+                        "kind": "GridLayoutItem",
+                        "spec": {
+                          "x": 12,
+                          "y": 0,
+                          "width": 12,
+                          "height": 10,
+                          "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-10"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            },
+            {
+              "kind": "RowsLayoutRow",
+              "spec": {
+                "title": "Errors",
+                "collapse": true,
+                "layout": {
+                  "kind": "GridLayout",
+                  "spec": {
+                    "items": [
+                      {
+                        "kind": "GridLayoutItem",
+                        "spec": {
+                          "x": 0,
+                          "y": 0,
+                          "width": 12,
+                          "height": 10,
+                          "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-12"
+                          }
+                        }
+                      },
+                      {
+                        "kind": "GridLayoutItem",
+                        "spec": {
+                          "x": 12,
+                          "y": 0,
+                          "width": 12,
+                          "height": 10,
+                          "element": {
+                            "kind": "ElementReference",
+                            "name": "panel-13"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "links": [],
+      "liveNow": false,
+      "preload": false,
+      "tags": [
+        "kubernetes-mixin"
+      ],
+      "timeSettings": {
+        "timezone": "browser",
+        "from": "now-1h",
+        "to": "now",
+        "autoRefresh": "10s",
+        "autoRefreshIntervals": [
+          "5s",
+          "10s",
+          "30s",
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "2h",
+          "1d"
+        ],
+        "hideTimepicker": false,
+        "fiscalYearStartMonth": 0
+      },
+      "title": "Kubernetes / Networking / Pod",
+      "variables": [
+        {
+          "kind": "DatasourceVariable",
+          "spec": {
+            "name": "datasource",
+            "pluginId": "prometheus",
+            "refresh": "onDashboardLoad",
+            "regex": "",
+            "current": {
+              "text": "default",
+              "value": "default"
+            },
+            "options": [],
+            "multi": false,
+            "includeAll": false,
+            "label": "Data Source",
+            "hide": "dontHide",
+            "skipUrlSync": false,
+            "allowCustomValue": true
+          }
+        },
+        {
+          "kind": "QueryVariable",
+          "spec": {
+            "name": "cluster",
+            "current": {
+              "text": "None",
+              "value": ""
+            },
+            "hide": "hideVariable",
+            "refresh": "onTimeRangeChanged",
+            "skipUrlSync": false,
+            "query": {
+              "kind": "DataQuery",
+              "group": "prometheus",
+              "version": "v0",
+              "datasource": {
+                "name": "$datasource"
+              },
+              "spec": {
+                "__legacyStringValue": "label_values(up{job=\"kubelet\", metrics_path=\"/metrics/cadvisor\"}, cluster)"
+              }
+            },
+            "regex": "",
+            "sort": "disabled",
+            "definition": "",
+            "options": [],
+            "multi": false,
+            "includeAll": false,
+            "allowCustomValue": true
+          }
+        },
+        {
+          "kind": "QueryVariable",
+          "spec": {
+            "name": "namespace",
+            "current": {
+              "text": "kube-system",
+              "value": "kube-system"
+            },
+            "hide": "dontHide",
+            "refresh": "onTimeRangeChanged",
+            "skipUrlSync": false,
+            "query": {
+              "kind": "DataQuery",
+              "group": "prometheus",
+              "version": "v0",
+              "datasource": {
+                "name": "$datasource"
+              },
+              "spec": {
+                "__legacyStringValue": "label_values(container_network_receive_packets_total{cluster=\"$cluster\"}, namespace)"
+              }
+            },
+            "regex": "",
+            "sort": "alphabeticalAsc",
+            "definition": "label_values(container_network_receive_packets_total{cluster=\"$cluster\"}, namespace)",
+            "options": [],
+            "multi": false,
+            "includeAll": true,
+            "allValue": ".+",
+            "allowCustomValue": true
+          }
+        },
+        {
+          "kind": "QueryVariable",
+          "spec": {
+            "name": "pod",
+            "current": {
+              "text": "coredns-555d98c87b-kbh2r",
+              "value": "coredns-555d98c87b-kbh2r"
+            },
+            "hide": "dontHide",
+            "refresh": "onTimeRangeChanged",
+            "skipUrlSync": false,
+            "query": {
+              "kind": "DataQuery",
+              "group": "prometheus",
+              "version": "v0",
+              "datasource": {
+                "name": "$datasource"
+              },
+              "spec": {
+                "__legacyStringValue": "label_values(container_network_receive_packets_total{cluster=\"$cluster\",namespace=~\"$namespace\"}, pod)"
+              }
+            },
+            "regex": "",
+            "sort": "alphabeticalAsc",
+            "definition": "label_values(container_network_receive_packets_total{cluster=\"$cluster\",namespace=~\"$namespace\"}, pod)",
+            "options": [],
+            "multi": false,
+            "includeAll": false,
+            "allValue": ".+",
+            "allowCustomValue": true
+          }
+        },
+        {
+          "kind": "IntervalVariable",
+          "spec": {
+            "name": "resolution",
+            "query": "30s,5m,1h",
+            "current": {
+              "text": "5m",
+              "value": "5m"
+            },
+            "options": [
+              {
+                "selected": false,
+                "text": "30s",
+                "value": "30s"
+              },
+              {
+                "selected": true,
+                "text": "5m",
+                "value": "5m"
+              },
+              {
+                "selected": false,
+                "text": "1h",
+                "value": "1h"
+              }
+            ],
+            "auto": false,
+            "auto_min": "10s",
+            "auto_count": 30,
+            "refresh": "onTimeRangeChanged",
+            "hide": "dontHide",
+            "skipUrlSync": false
+          }
+        },
+        {
+          "kind": "IntervalVariable",
+          "spec": {
+            "name": "interval",
+            "query": "4h",
+            "current": {
+              "text": "4h",
+              "value": "4h"
+            },
+            "options": [
+              {
+                "selected": true,
+                "text": "4h",
+                "value": "4h"
+              }
+            ],
+            "auto": false,
+            "auto_min": "10s",
+            "auto_count": 30,
+            "refresh": "onTimeRangeChanged",
+            "hide": "hideVariable",
+            "skipUrlSync": false
+          }
+        }
+      ]
+    }
+}
