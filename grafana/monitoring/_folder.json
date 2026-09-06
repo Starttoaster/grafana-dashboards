@@ -1,0 +1,10 @@
+{
+  "kind": "Folder",
+  "apiVersion": "folder.grafana.app/v1",
+  "metadata": {
+    "name": "dfxhcn7x03r44f"
+  },
+  "spec": {
+    "title": "monitoring"
+  }
+}
